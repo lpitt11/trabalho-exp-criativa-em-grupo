@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noite em Curitiba — As Melhores Baladas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96E;
+    --gold-dim: #8B6F2E;
+    --bg: #080808;
+    --bg2: #111111;
+    --bg3: #1a1a1a;
+    --text: #F0EDE6;
+    --text-muted: #888;
+    --border: rgba(201,168,76,0.18);
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 30%, rgba(201,168,76,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 70%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+  .hero-tag {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    letter-spacing: -2px;
+    color: var(--text);
+    position: relative;
+    margin-bottom: 32px;
+  }
+  h1 span {
+    color: var(--gold);
+    display: block;
+  }
+  .hero-desc {
+    max-width: 520px;
+    font-size: 17px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--gold);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid var(--gold);
+    padding: 16px 32px;
+    transition: all 0.3s;
+    position: relative;
+  }
+  .hero-cta:hover {
+    background: var(--gold);
+    color: var(--bg);
+  }
+  .hero-cta svg { transition: transform 0.3s; }
+  .hero-cta:hover svg { transform: translateX(4px); }
+
+  /* SECTION TITLE */
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 64px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  /* CLUBS SECTION */
+  #baladas {
+    padding: 120px 48px;
+    position: relative;
+  }
+
+  .clubs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+
+  .club-card {
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .club-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 1;
+  }
+  .club-card:hover::before { opacity: 0.04; }
+
+  .club-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--gold);
+    transition: height 0.5s ease;
+    z-index: 2;
+  }
+  .club-card:hover .club-accent { height: 100%; }
+
+  .club-inner {
+    padding: 52px 48px;
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .club-number {
+    font-family: var(--font-display);
+    font-size: 80px;
+    line-height: 1;
+    color: rgba(201,168,76,0.08);
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    transition: color 0.4s;
+    pointer-events: none;
+  }
+  .club-card:hover .club-number { color: rgba(201,168,76,0.13); }
+
+  .club-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 0.5px solid var(--gold-dim);
+    padding: 5px 12px;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+
+  .club-name {
+    font-family: var(--font-display);
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: 1px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .club-address {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+  }
+
+  .club-desc {
+    font-size: 15px;
+    color: #999;
+    font-weight: 300;
+    line-height: 1.8;
+    flex: 1;
+    margin-bottom: 36px;
+  }
+
+  .club-meta {
+    display: flex;
+    gap: 32px;
+    border-top: 0.5px solid rgba(201,168,76,0.12);
+    padding-top: 28px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+  }
+  .meta-value {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .stars {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .club-arrow {
+    position: absolute;
+    bottom: 48px;
+    right: 48px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-dim);
+    transition: all 0.3s;
+    z-index: 3;
+  }
+  .club-card:hover .club-arrow {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201,168,76,0.08);
+  }
+
+  /* MAP SECTION */
+  #localizacao {
+    padding: 120px 48px;
+    border-top: 0.5px solid var(--border);
+    background: var(--bg2);
+  }
+  .map-wrapper {
+    position: relative;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  #map-container {
+    width: 100%;
+    height: 500px;
+    filter: invert(1) hue-rotate(180deg) saturate(0.6) brightness(0.85);
+  }
+
+  /* ABOUT SECTION */
+  #sobre {
+    padding: 120px 48px;
+    border-top: 0.5px solid var(--border);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-left h2 {
+    font-family: var(--font-display);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+  .about-left h2 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .about-left p {
+    font-size: 16px;
+    color: #888;
+    font-weight: 300;
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+  .stat-row {
+    display: flex;
+    gap: 48px;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 0.5px solid var(--border);
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-desc {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .about-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .about-feature {
+    background: var(--bg2);
+    padding: 36px 28px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .about-feature:hover { border-bottom-color: var(--gold); }
+  .feature-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .feature-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .feature-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+  .footer-copy {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero > * { animation: fadeUp 0.8s ease forwards; }
+  .hero-tag { animation-delay: 0.1s; opacity: 0; }
+  h1 { animation-delay: 0.25s; opacity: 0; }
+  .hero-desc { animation-delay: 0.4s; opacity: 0; }
+  .hero-cta { animation-delay: 0.55s; opacity: 0; }
+
+  /* SCROLL ANIMATE */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 0 24px 60px; }
+    #baladas, #localizacao, #sobre { padding: 80px 24px; }
+    .clubs-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">CWBA</div>
+  <ul class="nav-links">
+    <li><a href="#baladas">Baladas</a></li>
+    <li><a href="#localizacao">Localização</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <p class="hero-tag">Curitiba · Batel · Bigorrilho</p>
+  <h1>A NOITE<span>COMEÇA</span>AQUI</h1>
+  <p class="hero-desc">
+    Curitiba tem uma das cenas noturnas mais vibrantes do Sul do Brasil.
+    Conheça os quatro clubes que definem a noite na capital paranaense.
+  </p>
+  <a href="#baladas" class="hero-cta">
+    Explorar baladas
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</section>
+
+<!-- BALADAS -->
+<section id="baladas">
+  <p class="section-label reveal">As melhores casas</p>
+  <div class="clubs-grid">
+
+    <!-- +55 -->
+    <div class="club-card reveal">
+      <div class="club-accent"></div>
+      <div class="club-number">01</div>
+      <div class="club-inner">
+        <span class="club-badge">Bar & Club · Premium</span>
+        <h2 class="club-name">+55</h2>
+        <p class="club-address">Av. Vicente Machado, 866 · Batel</p>
+        <p class="club-desc">
+          O nome é uma declaração de brasilidade. O +55 é referência no Batel com ambiente sofisticado,
+          equipe profissional e seleção musical que vai do house ao pop nacional.
+          Com capacidade para boa pista e som de qualidade, é um dos mais bem avaliados da cidade.
+        </p>
+        <div class="club-meta">
+          <div class="meta-item">
+            <span class="meta-label">Horário</span>
+            <span class="meta-value">Sex–Sáb, 23h–6h</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Avaliação</span>
+            <span class="meta-value stars">★★★★☆ <span style="color:#888;font-size:12px;">4.2</span></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Estilo</span>
+            <span class="meta-value">House · Pop · Eletrônico</span>
+          </div>
+        </div>
+      </div>
+      <div class="club-arrow">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- FOLKS -->
+    <div class="club-card reveal">
+      <div class="club-accent"></div>
+      <div class="club-number">02</div>
+      <div class="club-inner">
+        <span class="club-badge">Sertanejo · Live Music</span>
+        <h2 class="club-name">FOLKS</h2>
+        <p class="club-address">R. Fernando Simas, 55 · Bigorrilho</p>
+        <p class="club-desc">
+          O Folks Pub é a casa do sertanejo universitário em Curitiba.
+          Com shows ao vivo, ambiente animado e três noites por semana de programação intensa,
+          é o point de quem quer dançar o forró e o sertanejo raiz da cena curitibana.
+        </p>
+        <div class="club-meta">
+          <div class="meta-item">
+            <span class="meta-label">Horário</span>
+            <span class="meta-value">Qui–Sáb, 22h–4h</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Avaliação</span>
+            <span class="meta-value stars">★★★☆☆ <span style="color:#888;font-size:12px;">3.7</span></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Estilo</span>
+            <span class="meta-value">Sertanejo · Forró</span>
+          </div>
+        </div>
+      </div>
+      <div class="club-arrow">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- YARD -->
+    <div class="club-card reveal">
+      <div class="club-accent"></div>
+      <div class="club-number">03</div>
+      <div class="club-inner">
+        <span class="club-badge">Open Air · Terrace Bar</span>
+        <h2 class="club-name">YARD</h2>
+        <p class="club-address">Al. Pres. Taunay, 435 · Batel</p>
+        <p class="club-desc">
+          Um conceito diferente: o Yard é uma balada ao ar livre coberta por uma estrutura inflável exclusiva
+          que cria um ambiente único. Capacidade para 800 pessoas, pizzas artesanais, drinks bem servidos
+          e um sistema de som que vibra na alma. Ideal para festas e aniversários.
+        </p>
+        <div class="club-meta">
+          <div class="meta-item">
+            <span class="meta-label">Horário</span>
+            <span class="meta-value">Sex–Sáb, 20h–4h</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Avaliação</span>
+            <span class="meta-value stars">★★★★☆ <span style="color:#888;font-size:12px;">4.1</span></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Estilo</span>
+            <span class="meta-value">Open Air · Multi-gênero</span>
+          </div>
+        </div>
+      </div>
+      <div class="club-arrow">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- LVL -->
+    <div class="club-card reveal">
+      <div class="club-accent"></div>
+      <div class="club-number">04</div>
+      <div class="club-inner">
+        <span class="club-badge">Night Club · Shows</span>
+        <h2 class="club-name">LVL</h2>
+        <p class="club-address">R. Fernando Simas, 247 · Bigorrilho</p>
+        <p class="club-desc">
+          A LVL Club é a novidade que chegou para elevar o nível da noite curitibana.
+          Com estrutura moderna, sistema de som e luzes de ponta, ar-condicionado na pista,
+          área VIP e grandes atrações, já se tornou referência para quem curte shows e festas marcantes.
+        </p>
+        <div class="club-meta">
+          <div class="meta-item">
+            <span class="meta-label">Horário</span>
+            <span class="meta-value">Sex, 22h–4h · Sáb, 22h–5h</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Avaliação</span>
+            <span class="meta-value stars">★★★★☆ <span style="color:#888;font-size:12px;">3.9</span></span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Estilo</span>
+            <span class="meta-value">Pop · Shows · Eletrônico</span>
+          </div>
+        </div>
+      </div>
+      <div class="club-arrow">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 13L13 3M13 3H6M13 3v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAP -->
+<section id="localizacao">
+  <p class="section-label reveal">Onde encontrar</p>
+  <div class="map-wrapper reveal">
+    <iframe
+      id="map-container"
+      src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3602.9!2d-49.2872!3d-25.435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sbaladas+batel+bigorrilho+curitiba!5e0!3m2!1spt!2sbr!4v1234567890"
+      allowfullscreen
+      loading="lazy"
+      title="Mapa das baladas de Curitiba"
+      style="border:0; display:block;"
+    ></iframe>
+  </div>
+  <div style="margin-top:32px; display:grid; grid-template-columns:repeat(4,1fr); gap:2px;" class="reveal">
+    <div style="background:var(--bg3); padding:24px 28px; display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0;"></div>
+      <div>
+        <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;">+55</p>
+        <p style="font-size:12px;color:var(--text-muted);">Av. Vicente Machado, 866 · Batel</p>
+      </div>
+    </div>
+    <div style="background:var(--bg3); padding:24px 28px; display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0;"></div>
+      <div>
+        <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;">Folks</p>
+        <p style="font-size:12px;color:var(--text-muted);">R. Fernando Simas, 55 · Bigorrilho</p>
+      </div>
+    </div>
+    <div style="background:var(--bg3); padding:24px 28px; display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0;"></div>
+      <div>
+        <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;">Yard</p>
+        <p style="font-size:12px;color:var(--text-muted);">Al. Pres. Taunay, 435 · Batel</p>
+      </div>
+    </div>
+    <div style="background:var(--bg3); padding:24px 28px; display:flex; gap:16px; align-items:flex-start;">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0;"></div>
+      <div>
+        <p style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px;">LVL Club</p>
+        <p style="font-size:12px;color:var(--text-muted);">R. Fernando Simas, 247 · Bigorrilho</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <p class="section-label">A cena noturna</p>
+      <h2>CURITIBA<br>DE <em>NOITE</em></h2>
+      <p>
+        Curitiba consolidou nos últimos anos uma das cenas noturnas mais diversas do Brasil.
+        Entre o Batel e o Bigorrilho, bairros sofisticados a poucos minutos do centro,
+        concentra-se o melhor da vida noturna paranaense.
+      </p>
+      <p>
+        São opções para todos os gostos: do eletrônico ao sertanejo, do open air ao club fechado,
+        de sexta a sábado, sempre com atrações de qualidade, drinks bem feitos e públicos apaixonados.
+      </p>
+      <div class="stat-row">
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-desc">Casas noturnas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">3k+</span>
+          <span class="stat-desc">Avaliações online</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-desc">Bairros centrais</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-right reveal">
+      <div class="about-feature">
+        <span class="feature-icon">🎧</span>
+        <p class="feature-title">DJs e shows ao vivo</p>
+        <p class="feature-desc">Atrações nacionais e locais todo fim de semana nas melhores casas da cidade.</p>
+      </div>
+      <div class="about-feature">
+        <span class="feature-icon">🍹</span>
+        <p class="feature-title">Drinks e gastronomia</p>
+        <p class="feature-desc">Combinações autorais, bar completo e opções de food pairing em cada estabelecimento.</p>
+      </div>
+      <div class="about-feature">
+        <span class="feature-icon">🔒</span>
+        <p class="feature-title">Segurança</p>
+        <p class="feature-desc">Equipes treinadas e ambientes controlados para garantir uma noite tranquila e segura.</p>
+      </div>
+      <div class="about-feature">
+        <span class="feature-icon">📍</span>
+        <p class="feature-title">Batel e Bigorrilho</p>
+        <p class="feature-desc">Os dois bairros mais badalados de Curitiba, cheios de restaurantes, bares e clubs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">CWBA</div>
+  <p class="footer-copy">© 2025 · Curitiba Nightlife · Todos os direitos reservados</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
