@@ -1,0 +1,114 @@
+/* ROTEIRO DO PROJETO: CSS */
+
+/* Class "container" */
+.container {
+  display: flex;
+  padding: 0px;
+}
+
+/* Menu */
+nav {
+  background-color: rgb(122, 163, 161);
+  width: 900px;
+  padding: 30px;
+  margin: 0 auto; /* Centraliza o menu na tela */
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+nav ul li {
+  padding: 5px;
+  text-align: center;
+}
+
+nav ul li a {
+  text-transform: uppercase;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  color: black;
+}
+
+/* footer */
+footer {
+  text-align: center;
+  color: black;
+  border-top: 2px solid black;
+  padding-top: 20px;
+  margin-top: 40px;
+}
+
+footer p {
+  text-align: center;
+}
+
+/* Classes "image" e "section-images" */
+.image {
+  text-align: center;
+}
+
+.image img {
+  max-height: 200px;
+  border: 1px solid darkcyan;
+  border-radius: 50%;
+}
+
+.section-images {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* body */
+body {
+  margin: 0;
+  font-size: 17px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 2;
+  color: #666;
+  text-align: justify;
+  background-color: #fdfbf7;
+}
+
+/* section */
+section {
+  padding: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* h1 */
+h1 {
+  font-size: 30px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 100;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Img hover */
+img:hover {
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+/* Classes extras de apoio (Animação) */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
