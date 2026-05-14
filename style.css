@@ -69,7 +69,7 @@ footer p {
   margin-top: 20px;
 }
 
-/* body */
+
 body {
   margin: 0;
   font-size: 17px;
@@ -80,14 +80,14 @@ body {
   background-color: #fdfbf7;
 }
 
-/* section */
+
 section {
   padding: 10px;
   max-width: 900px;
   margin: 0 auto;
 }
 
-/* h1 */
+
 h1 {
   font-size: 30px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -96,13 +96,13 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Img hover */
+
 img:hover {
   filter: grayscale(100%);
   transition: filter 0.3s;
 }
 
-/* Classes extras de apoio (Animação) */
+
 .reveal {
   opacity: 0;
   transform: translateY(20px);

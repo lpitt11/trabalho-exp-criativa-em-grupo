@@ -1,4 +1,4 @@
-// Arquivo JavaScript criado a partir da tag <script> original
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const reveals = document.querySelectorAll('.reveal');
